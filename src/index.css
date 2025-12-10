@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    prefersdark: false;
+    color-scheme: light;
+
+    --color-base-100: oklch(1 0 0);
+    --color-base-200: oklch(0.95 0.015 80);
+    --color-base-300: oklch(0.88 0.01 80);
+    --color-base-content: oklch(0.32 0.06 40);
+
+    --color-primary: oklch(0.52 0.09 60);
+    --color-primary-content: oklch(0.98 0.01 80);
+
+    --color-secondary: oklch(0.74 0.11 70);
+    --color-secondary-content: oklch(0.32 0.06 40);
+
+    --color-accent: oklch(0.78 0.12 70);
+    --color-accent-content: oklch(0.32 0.06 40);
+
+    --color-neutral: oklch(0.40 0.04 40);
+    --color-neutral-content: oklch(0.98 0.01 80);
+
+    --color-info: oklch(0.75 0.12 240);
+    --color-info-content: oklch(0.15 0.03 240);
+
+    --color-success: oklch(0.75 0.14 150);
+    --color-success-content: oklch(0.15 0.03 150);
+
+    --color-warning: oklch(0.82 0.16 80);
+    --color-warning-content: oklch(0.22 0.05 80);
+
+    --color-error: oklch(0.65 0.18 30);
+    --color-error-content: oklch(0.98 0.01 30);
+}
+
+/* active class (navbar) */
+.active {
+    @apply text-primary bg-primary/10
+}
+
+.my-gradient {
+    background: linear-gradient(135deg,
+            oklch(0.52 0.09 60),
+            oklch(0.74 0.11 70));
+    color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: background 0.35s ease,
+        box-shadow 0.35s ease,
+        transform 0.35s ease;
+}
+
+.hover-gradient:hover {
+    background: linear-gradient(135deg,
+            oklch(0.56 0.09 60),
+            oklch(0.78 0.10 70));
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* alert styling */
+.swift-popup {
+    border-radius: 1rem !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 4px 20px oklch(0% 0 0 / 0.06);
+}
+
+.swift-title {
+    font-weight: 700;
+    color: oklch(25% 0.03 85);
+}
+
+.swift-text {
+    color: oklch(40% 0.03 85);
+    font-weight: 500;
+}
+
+.swift-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    margin-right: 4px;
+}
+
+.swift-btn-cancel {
+    background: oklch(92% 0.02 85);
+    color: oklch(30% 0.04 85);
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.swift-btn-cancel:hover {
+    background: oklch(88% 0.03 85);
+    transform: translateY(-1px);
+}
