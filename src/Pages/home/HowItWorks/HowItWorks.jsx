@@ -58,7 +58,7 @@ const HowItWorks = () => {
                             key={index}
                             data-aos={step.animation}
                             data-aos-duration="900"
-                            className="bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-200 p-6 transition-all duration-300 hover:-translate-y-1"
+                            className="bg-white rounded-2xl shadow-md hover:shadow-xl border border-gray-200 p-6"
                         >
                             <div className="text-[#6f4e37] mb-4">
                                 {step.icon}
