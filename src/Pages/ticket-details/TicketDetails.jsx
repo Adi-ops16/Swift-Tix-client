@@ -10,11 +10,13 @@ import Countdown from '../../Components/Shared/CountDown.jsx';
 import SmallLoader from '../../Components/Loading/smallLoader.jsx';
 import SwiftConfirm from '../../utils/alerts/SwiftConfirm.jsx';
 import SwiftAlert from '../../utils/alerts/SwiftAlert.jsx';
+import useAuth from '../../Hooks/useAuth.jsx';
 
 const TicketDetails = () => {
     const { id } = useParams()
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
+    const { user } = useAuth()
     const [isOpen, setIsOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [bookedQuantity, setBookedQuantity] = useState(1)
@@ -40,7 +42,43 @@ const TicketDetails = () => {
     const date = dateTime.toLocaleDateString()
     const isExpired = new Date(departure) < new Date()
 
-    
+    const handleBooking = async () => {
+        setLoading(true)
+        const res = await SwiftConfirm({
+            title: "Booking Confirming",
+            text: `Do you want to purchase ${bookedQuantity} tickets of ${ticketName}`,
+            icon: "info"
+        })
+
+        if (res.isConfirmed) {
+            const bookingData = {
+                ticketName,
+                ticketURL,
+                booking_quantity: bookedQuantity,
+                price,
+                quantity,
+                from,
+                to,
+                userEmail: user.email,
+                userName: user.displayName,
+                departure,
+                vendorEmail,
+                vendorName,
+                status: 'pending'
+            }
+
+            axiosSecure.post('/bookings', bookingData)
+                .then(res => {
+                    if (res.data.insertedId) {
+                        SwiftAlert({
+                            title: "Booking Done",
+                            text: "please wait for the vendor to accept your booking request"
+                        })
+                    }
+                })
+        }
+        setLoading(false)
+    }
 
     return (
         <section className="py-5 md:py-16 bg-[#faf9f7] min-h-screen">
