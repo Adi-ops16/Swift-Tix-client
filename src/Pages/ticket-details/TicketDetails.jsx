@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { BiChevronLeft } from 'react-icons/bi';
-import useRemainingTime from '../../utils/time-calculation/index.js';
+import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
+import { AnimatePresence, motion } from 'framer-motion';
+import Countdown from '../../Components/Shared/CountDown.jsx';
+import SmallLoader from '../../Components/Loading/smallLoader.jsx';
+import SwiftConfirm from '../../utils/alerts/SwiftConfirm.jsx';
+import SwiftAlert from '../../utils/alerts/SwiftAlert.jsx';
 
 const TicketDetails = () => {
     const { id } = useParams()
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
+    const [isOpen, setIsOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [bookedQuantity, setBookedQuantity] = useState(1)
 
     const { data: ticket = {} } = useQuery({
         queryKey: ['ticket', id],
@@ -27,18 +35,19 @@ const TicketDetails = () => {
         minute: '2-digit',
         hour12: true
     }
+
     const time = dateTime.toLocaleTimeString(undefined, options)
     const date = dateTime.toLocaleDateString()
-    const countdown = useRemainingTime(departure)
+    const isExpired = new Date(departure) < new Date()
+
+    
 
     return (
         <section className="py-5 md:py-16 bg-[#faf9f7] min-h-screen">
             <div className="max-w-6xl mx-auto px-4 md:px-8">
-
                 <h2
                     className="text-3xl md:text-4xl font-extrabold text-center text-[#2e2e2e] mb-5 md:mb-10"
-                    data-aos="fade-up"
-                >
+                    data-aos="fade-up">
                     Ticket Details
                 </h2>
 
@@ -112,7 +121,10 @@ const TicketDetails = () => {
                         </div>
 
                         <div className='flex flex-row justify-between items-center'>
-                            <button className='btn my-gradient hover-gradient'>
+                            <button
+                                onClick={() => setIsOpen(true)}
+                                disabled={quantity <= 0 || isExpired}
+                                className='btn my-gradient hover-gradient'>
                                 Book Now <FaCalendarAlt />
                             </button>
 
@@ -124,52 +136,75 @@ const TicketDetails = () => {
                             </button>
                         </div>
 
-                        {/* Countdown Area */}
                         <div className="bg-[#f3eee9] border border-[#e0d8d0] rounded-xl p-5 mt-4">
                             <h4 className="text-xl font-bold text-[#2e2e2e] mb-3">
                                 Time left until departure
                             </h4>
 
-                            {countdown?.expired ? (
-                                <p className="text-red-600 font-semibold text-lg">
-                                    Departure time has passed.
-                                </p>
-                            ) : (
-                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-                                    <div className="bg-white shadow rounded-xl py-3">
-                                        <p className="text-3xl font-bold text-[#5b3f2d]">
-                                            {countdown.days}
-                                        </p>
-                                        <p className="text-gray-600 text-sm">Days</p>
-                                    </div>
-
-                                    <div className="bg-white shadow rounded-xl py-3">
-                                        <p className="text-3xl font-bold text-[#5b3f2d]">
-                                            {countdown.hours}
-                                        </p>
-                                        <p className="text-gray-600 text-sm">Hours</p>
-                                    </div>
-
-                                    <div className="bg-white shadow rounded-xl py-3">
-                                        <p className="text-3xl font-bold text-[#5b3f2d]">
-                                            {countdown.minutes}
-                                        </p>
-                                        <p className="text-gray-600 text-sm">Minutes</p>
-                                    </div>
-
-                                    <div className="bg-white shadow rounded-xl py-3">
-                                        <p className="text-3xl font-bold text-[#5b3f2d]">
-                                            {countdown.seconds}
-                                        </p>
-                                        <p className="text-gray-600 text-sm">Seconds</p>
-                                    </div>
-                                </div>
-                            )}
+                            <Countdown departure={departure}></Countdown>
                         </div>
                     </div>
                 </div>
-
             </div>
+
+            {/* booking modal */}
+
+            {isOpen &&
+                <AnimatePresence>
+                    <Dialog
+                        open={isOpen}
+                        onClose={() => setIsOpen(false)}
+                        className="relative z-50"
+                    >
+
+                        <div className="fixed inset-0 bg-black/40" aria-hidden="true" />
+
+                        <div className="fixed inset-0 flex items-center justify-center p-4">
+                            <DialogPanel
+                                as={motion.div}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.25, ease: 'easeOut' }}
+                                className="mx-auto max-w-md rounded-2xl bg-white p-6 shadow-lg space-y-5">
+                                <DialogTitle className="text-2xl font-bold text-[#2e2e2e]">
+                                    Book Your Ticket
+                                </DialogTitle>
+
+                                <p className="text-gray-700">
+                                    Enter the quantity you want to book. Max allowed: {quantity}
+                                </p>
+
+                                <input
+                                    type="number"
+                                    min="1"
+                                    defaultValue={bookedQuantity}
+                                    onChange={(e) => setBookedQuantity(Number(e.target.value))}
+                                    max={quantity}
+                                    className="input input-bordered w-full"
+                                />
+
+                                <div className="flex justify-end gap-3 pt-3">
+                                    <button
+                                        onClick={() => setIsOpen(false)}
+                                        className="btn btn-secondary"
+                                    >
+                                        Cancel
+                                    </button>
+
+                                    <button
+                                        onClick={handleBooking}
+                                        className="btn my-gradient hover-gradient"
+                                    >
+                                        {loading ? <SmallLoader /> : "Confirm Booking"}
+                                    </button>
+                                </div>
+                            </DialogPanel>
+                        </div>
+                    </Dialog>
+                </AnimatePresence>
+            }
+
         </section>
 
     );

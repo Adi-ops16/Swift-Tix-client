@@ -122,7 +122,6 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
                             </DialogTitle>
 
                             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-                                {/* Ticket Name (readonly) */}
                                 <div>
                                     <label className="font-medium">Ticket Name</label>
                                     <input
@@ -132,7 +131,6 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
                                     />
                                 </div>
 
-                                {/* Image Upload */}
                                 <div>
                                     <label className="label">Upload New Image</label>
                                     <input
@@ -142,7 +140,6 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
                                     />
                                 </div>
 
-                                {/* From / To */}
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <label className="font-medium">From</label>
@@ -167,7 +164,6 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
                                     </div>
                                 </div>
 
-                                {/* Departure */}
                                 <div>
                                     <label className="font-medium">Departure Date & Time</label>
                                     <input
@@ -181,7 +177,6 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
                                     )}
                                 </div>
 
-                                {/* Price / Quantity */}
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <label className="font-medium">Price (৳)</label>
@@ -225,7 +220,6 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
                                     />
                                 </div>
 
-                                {/* Perks */}
                                 <div className="col-span-2">
                                     <label className="label font-medium">Perks</label>
 
@@ -245,7 +239,6 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
                                     </div>
                                 </div>
 
-                                {/* Buttons */}
                                 <div className="flex justify-end gap-3 pt-4">
                                     <button
                                         type="button"
