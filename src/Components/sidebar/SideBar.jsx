@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { FaThLarge, FaUser, FaSignOutAlt, FaUsers } from "react-icons/fa";
-import { IoTicket } from "react-icons/io5";
+import { IoTicket, IoBagAdd } from "react-icons/io5";
 import { LuTicketPlus } from "react-icons/lu";
 import { motion } from "framer-motion";
 import useAuth from "../../Hooks/useAuth";
@@ -18,6 +18,9 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
     const menu = [
         { to: "/dashboard", label: "Dashboard", icon: <FaThLarge /> },
         { to: "/dashboard/profile", label: "My Profile", icon: <FaUser /> },
+        ...role === 'user' ? [
+            { to: "/dashboard/bookings", label: "My Booked Tickets", icon: <IoBagAdd /> },
+        ] : [],
 
         ...role === 'vendor' ? [
             { to: "/dashboard/add-ticket", label: "Add tickets", icon: <IoTicket /> },

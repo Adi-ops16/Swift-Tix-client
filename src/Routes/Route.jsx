@@ -18,6 +18,8 @@ import ManageTickets from "../Pages/dashboard/manage-tickets/ManageTickets";
 import ManageUsers from "../Pages/dashboard/manage-users/ManageUsers";
 import AdvertiseTickets from "../Pages/dashboard/advertise-tickets/AdvertiseTickets";
 import TicketDetails from "../Pages/ticket-details/TicketDetails";
+import UserRoute from "./UserRoute";
+import MyBookedTickets from "../Pages/dashboard/booked-tickets/MyBookedTickets";
 
 export const router = createBrowserRouter([
     {
@@ -72,6 +74,13 @@ export const router = createBrowserRouter([
             {
                 path: 'profile',
                 Component: Profile
+            },
+            // pages for users
+            {
+                path: 'bookings',
+                element: <UserRoute>
+                    <MyBookedTickets></MyBookedTickets>
+                </UserRoute>
             },
             // pages for admin
             {
