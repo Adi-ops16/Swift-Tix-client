@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { Link } from 'react-router';
 
 const Banner = () => {
 
@@ -16,6 +17,7 @@ const Banner = () => {
             title: "Welcome to Swift-Tix",
             description: "Your go to application on booking online tickets to ensure smooth travel experience",
             btn: "About us",
+            to: ''
         },
         {
             id: 2,
@@ -24,6 +26,7 @@ const Banner = () => {
             description:
                 "Book your tickets instantly with secure and fast Stripe payment — ensuring a smoother travel experience.",
             btn: "Book Now",
+            to: ''
         },
         {
             id: 3,
@@ -32,6 +35,7 @@ const Banner = () => {
             description:
                 "Swift-Tix ensures your travel is smooth, stress-free, and comfortable with verified tickets and easy booking.",
             btn: "Explore Tickets",
+            to: 'all-tickets'
         },
     ];
 
@@ -72,7 +76,7 @@ const Banner = () => {
                                     </p>
 
                                     <button className="mt-6 px-6 py-3 rounded-xl bg-primary text-white font-semibold shadow-md hover:bg-primary/80 transition">
-                                        {banner.btn}
+                                        <Link to={banner.to}>{banner.btn}</Link>
                                     </button>
                                 </div>
                             </div>

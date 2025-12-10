@@ -5,6 +5,7 @@ import LatestTickets from './latest-tickets/LatestTickets';
 import Partners from './partners/Partners';
 import HowItWorks from './HowItWorks/HowItWorks';
 import FAQ from './FAQ/FAQ';
+import About from './About/About';
 
 const Home = () => {
 
@@ -16,6 +17,7 @@ const Home = () => {
             <LatestTickets></LatestTickets>
             <Partners></Partners>
             <HowItWorks></HowItWorks>
+            <About></About>
             <FAQ></FAQ>
         </div>
 

@@ -56,7 +56,7 @@ const TicketDetails = () => {
                     </div>
 
                     {/* Right: Details */}
-                    <div className="space-y-6">
+                    <div className="space-y-6 flex flex-col justify-evenly">
 
                         {/* Ticket Name */}
                         <h3 className="text-3xl md:text-4xl font-bold text-[#2e2e2e]">
