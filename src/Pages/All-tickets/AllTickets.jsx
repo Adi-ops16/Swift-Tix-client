@@ -112,9 +112,9 @@ const AllTickets = () => {
 
                             </div>
 
-                            <Link to={`/ticket/${_id}`} className="px-2">
+                            <Link to={`/ticket/${_id}`} className="px-5 my-2">
                                 <button
-                                    className="btn my-gradient hover-gradient transition-all duration-300 flex justify-center items-center gap-2 cursor-pointer mb-3"
+                                    className="btn w-full my-gradient hover-gradient transition-all duration-300 flex justify-center items-center gap-2 cursor-pointer mb-3"
                                 >
                                     See Details
                                     <FaQuestionCircle />
