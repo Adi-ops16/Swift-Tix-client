@@ -97,25 +97,9 @@ const Advertisement = () => {
                                     className="w-full h-42 object-cover transition-all duration-500 group-hover:scale-105"
                                 />
 
-                                {/* Content layer */}
                                 <div className="p-6 space-y-3">
                                     <h3 className="text-2xl font-bold text-[#2e2e2e]">{ticket.ticketName}</h3>
 
-                                    <div className="flex justify-between items-center">
-                                        {/* Price */}
-                                        <p className="text-lg font-semibold text-[#5b3f2d]">
-                                            💰 TK {ticket.price}
-                                            <span className="text-sm text-gray-500"> / per unit</span>
-                                        </p>
-
-                                        {/* Quantity */}
-                                        <p className="text-gray-700">
-                                            <span className="font-semibold">Quantity:</span>{" "}
-                                            {ticket.quantity}
-                                        </p>
-                                    </div>
-
-                                    {/* Transport */}
                                     <div className="flex items-center gap-2 text-gray-700 text-md">
                                         <span className="text-xl text-[#5b3f2d]">
                                             {getTransportIcon(ticket.transport_type)}
@@ -123,23 +107,28 @@ const Advertisement = () => {
                                         {ticket.transport_type}
                                     </div>
 
-                                    {/* Perks */}
-                                    <div>
-                                        <p className="font-semibold mb-1">Perks:</p>
-                                        <ul className="list-disc pl-5 text-gray-600 leading-snug flex gap-7">
-                                            {ticket.perks?.slice(0, 3).map((perk, i) => (
-                                                <li key={i}>{perk}</li>
-                                            ))}
-                                        </ul>
+                                    <div className="flex justify-between items-center">
+
+                                        <p className="text-lg font-semibold text-[#5b3f2d]">
+                                            💰 TK {ticket.price}
+                                            <span className="text-sm text-gray-500"> / per unit</span>
+                                        </p>
+
+                                        <p className="text-gray-700">
+                                            <span className="font-semibold">Quantity:</span>{" "}
+                                            {ticket.quantity}
+                                        </p>
                                     </div>
+
+
 
                                     {/* Button */}
                                     <Link to={`/ticket/${ticket._id}`}>
                                         <button
-                                            className="mt-3 w-full bg-[#6f4e37] hover:bg-[#5b3f2d] 
-                                            text-white py-2.5 rounded-xl font-semibold flex justify-center items-center gap-2 transition-all duration-300"
+                                            className="btn w-full my-gradient hover-gradient transition-all duration-300 flex justify-center items-center gap-2 cursor-pointer mb-3"
                                         >
-                                            <FaQuestionCircle /> See Details
+                                            See Details
+                                            <FaQuestionCircle />
                                         </button>
                                     </Link>
                                 </div>

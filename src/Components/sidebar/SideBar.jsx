@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { FaThLarge, FaUser, FaSignOutAlt, FaUsers } from "react-icons/fa";
 import { IoTicket } from "react-icons/io5";
 import { LuTicketPlus } from "react-icons/lu";
@@ -123,9 +123,9 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
                 </button>
 
                 {/* Logo */}
-                <div className="font-bold text-lg">
+                <Link to="/" className="font-bold text-lg">
                     <Logo />
-                </div>
+                </Link>
 
                 {/* Help Button */}
                 <button className="btn btn-ghost btn-sm">Help</button>

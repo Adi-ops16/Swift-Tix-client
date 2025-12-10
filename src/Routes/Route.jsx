@@ -17,6 +17,7 @@ import AdminRoute from "./AdminRoute";
 import ManageTickets from "../Pages/dashboard/manage-tickets/ManageTickets";
 import ManageUsers from "../Pages/dashboard/manage-users/ManageUsers";
 import AdvertiseTickets from "../Pages/dashboard/advertise-tickets/AdvertiseTickets";
+import TicketDetails from "../Pages/ticket-details/TicketDetails";
 
 export const router = createBrowserRouter([
     {
@@ -29,9 +30,15 @@ export const router = createBrowserRouter([
                 Component: Home
             },
             {
-                path: '/all-tickets',
+                path: 'all-tickets',
                 element: <PrivateRoute>
                     <AllTickets></AllTickets>
+                </PrivateRoute>
+            },
+            {
+                path: '/ticket/:id',
+                element: <PrivateRoute>
+                    <TicketDetails></TicketDetails>
                 </PrivateRoute>
             }
         ]

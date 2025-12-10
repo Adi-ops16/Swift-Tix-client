@@ -49,34 +49,20 @@ const LatestTickets = () => {
                             key={ticket._id}
                             data-aos={index < 3 ? "fade-right" : "fade-left"}
                             data-aos-duration="900"
-                            className="bg-white rounded-2xl border border-gray-200 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col"
+                            className="bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden flex flex-col"
                         >
-                            {/* Image */}
                             <img
                                 src={ticket.ticketURL}
                                 alt={ticket.ticketName}
                                 className="w-full h-56 object-cover"
                             />
 
-                            {/* Content */}
                             <div className="p-5 space-y-3 flex-1">
 
                                 <h3 className="text-xl font-bold text-[#2e2e2e]">
                                     {ticket.ticketName}
                                 </h3>
 
-                                {/* Price */}
-                                <p className="text-lg font-semibold text-[#5b3f2d]">
-                                    💰 ${ticket.price}
-                                    <span className="text-sm text-gray-500"> / per unit</span>
-                                </p>
-
-                                {/* Quantity */}
-                                <p className="text-gray-700">
-                                    <span className="font-semibold">Quantity:</span> {ticket.quantity}
-                                </p>
-
-                                {/* Transport Icon */}
                                 <div className="flex items-center gap-2 text-gray-700 text-md">
                                     <span className="text-xl text-[#5b3f2d]">
                                         {getTransportIcon(ticket.transport_type)}
@@ -84,16 +70,18 @@ const LatestTickets = () => {
                                     {ticket.transport_type}
                                 </div>
 
-                                {/* Perks */}
-                                <div>
-                                    <p className="font-semibold mb-1">Perks:</p>
-                                    <ul className="list-disc pl-5 text-gray-600 leading-snug flex gap-7">
-                                        {ticket.perks?.slice(0, 3).map((perk, i) => (
-                                            <li key={i}>{perk}</li>
-                                        ))}
-                                    </ul>
-                                </div>
+                                <div className="flex justify-between items-center">
 
+                                    <p className="text-lg font-semibold text-[#5b3f2d]">
+                                        💰 TK {ticket.price}
+                                        <span className="text-sm text-gray-500"> / per unit</span>
+                                    </p>
+
+                                    <p className="text-gray-700">
+                                        <span className="font-semibold">Quantity:</span>{" "}
+                                        {ticket.quantity}
+                                    </p>
+                                </div>
 
                             </div>
                             {/* Button */}
@@ -101,7 +89,7 @@ const LatestTickets = () => {
                                 className="px-2"
                             >
                                 <button
-                                    className="mt-3 w-full bg-[#6f4e37] hover:bg-[#5b3f2d] text-white py-2.5 my-2 rounded-xl font-semibold transition-all duration-300 flex justify-center items-center gap-2"
+                                    className="btn my-gradient hover-gradient transition-all duration-300 flex justify-center items-center gap-2 cursor-pointer mb-3 w-full"
                                 >
                                     See Details
                                     <FaQuestionCircle />

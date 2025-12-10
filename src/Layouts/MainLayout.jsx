@@ -21,7 +21,7 @@ const MainLayout = () => {
     }, [])
 
     return (
-        <div className='max-w-7xl mx-auto flex flex-col justify-between min-h-screen'>
+        <div className='max-w-7xl mx-auto flex flex-col justify-between min-h-screen overflow-x-hidden'>
             <Navbar></Navbar>
             <div className='flex-1'>
                 <Outlet></Outlet>
