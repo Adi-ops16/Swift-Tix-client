@@ -20,6 +20,7 @@ import AdvertiseTickets from "../Pages/dashboard/advertise-tickets/AdvertiseTick
 import TicketDetails from "../Pages/ticket-details/TicketDetails";
 import UserRoute from "./UserRoute";
 import MyBookedTickets from "../Pages/dashboard/booked-tickets/MyBookedTickets";
+import RequestedBookings from "../Pages/dashboard/requested-bookings/RequestedBookings";
 
 export const router = createBrowserRouter([
     {
@@ -112,6 +113,12 @@ export const router = createBrowserRouter([
                 path: 'added-tickets',
                 element: <VendorRoute>
                     <AddedTickets></AddedTickets>
+                </VendorRoute>
+            },
+            {
+                path: 'requested-bookings',
+                element: <VendorRoute>
+                    <RequestedBookings></RequestedBookings>
                 </VendorRoute>
             },
         ]

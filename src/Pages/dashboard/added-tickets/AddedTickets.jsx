@@ -161,6 +161,7 @@ const AddedTickets = () => {
 
                                         <button
                                             onClick={() => handleDelete(ticket._id)}
+                                            disabled={disabled}
                                             className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-red-600 bg-white font-semibold cursor-pointer`}
                                         >
                                             <FaTrash /> Delete
