@@ -18,6 +18,9 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
     const { _id, ticketName, from, to, price, quantity, departure, perks, transport_type, ticketURL } = ticket || {};
 
 
+    console.log({ price, quantity, ticketName, _id })
+
+
     const { mutateAsync, reset, isPending, isError } = useMutation({
         mutationFn: async (payload) => axiosSecure.patch(`/tickets/update/${_id}`, payload),
         onSuccess: () => {
@@ -242,7 +245,10 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
                                 <div className="flex justify-end gap-3 pt-4">
                                     <button
                                         type="button"
-                                        onClick={() => setIsOpen(false)}
+                                        onClick={() => {
+                                            setIsOpen(false)
+                                            formReset()
+                                        }}
                                         className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300"
                                     >
                                         Cancel

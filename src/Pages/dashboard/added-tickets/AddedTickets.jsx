@@ -100,7 +100,18 @@ const AddedTickets = () => {
                                         Departure: {new Date(ticket.departure).toLocaleString()}
                                     </p>
 
-                                    <p className="font-semibold text-lg mt-3">৳ {ticket.price}</p>
+                                    <div className="flex justify-between items-center">
+                                        <p className="mt-3">
+                                            Price: <span className="font-semibold text-lg">
+                                                ${ticket.price}
+                                            </span>
+                                        </p>
+                                        <p className="mt-3">
+                                            Quantity: <span className="font-semibold text-lg">
+                                                {ticket.quantity}
+                                            </span>
+                                        </p>
+                                    </div>
 
                                     <div className="mt-3">
                                         <p className="text-sm font-semibold">Perks:</p>
@@ -150,13 +161,7 @@ const AddedTickets = () => {
 
                                         <button
                                             onClick={() => handleDelete(ticket._id)}
-                                            disabled={disabled}
-                                            className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-red-600 font-semibold
-                                                ${disabled
-                                                    ? "bg-gray-300 cursor-not-allowed"
-                                                    : "bg-white/80 cursor-pointer hover:bg-white hover:brightness-150"
-                                                }
-                                            `}
+                                            className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-red-600 bg-white font-semibold cursor-pointer`}
                                         >
                                             <FaTrash /> Delete
                                         </button>

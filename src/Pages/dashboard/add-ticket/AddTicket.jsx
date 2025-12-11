@@ -41,7 +41,8 @@ const AddTicket = () => {
                 quantity: Number(quantity),
                 transport_type: transport,
                 vendorEmail: user?.email,
-                vendorName: user?.displayName
+                vendorName: user?.displayName,
+                bookings: []
             }
 
             const result = await SwiftConfirm({

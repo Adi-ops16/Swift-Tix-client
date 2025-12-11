@@ -7,10 +7,10 @@ import { BiChevronLeft } from 'react-icons/bi';
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Countdown from '../../Components/Shared/CountDown.jsx';
-import SmallLoader from '../../Components/Loading/smallLoader.jsx';
 import SwiftConfirm from '../../utils/alerts/SwiftConfirm.jsx';
 import SwiftAlert from '../../utils/alerts/SwiftAlert.jsx';
 import useAuth from '../../Hooks/useAuth.jsx';
+import SmallLoader from '../../Components/Loading/SmallLoader.jsx';
 
 const TicketDetails = () => {
     const { id } = useParams()
@@ -50,30 +50,36 @@ const TicketDetails = () => {
             icon: "info"
         })
 
+
+        // quantity validation
+        if (bookedQuantity < 1 || bookedQuantity > quantity) {
+            SwiftAlert({
+                title: "Invalid Quantity",
+                text: `You must book between 1 and ${quantity} tickets.`,
+                icon: "warning"
+            });
+            setLoading(false);
+            return;
+        }
+
         if (res.isConfirmed) {
             const bookingData = {
-                ticketName,
-                ticketURL,
-                booking_quantity: bookedQuantity,
-                price,
-                quantity,
-                from,
-                to,
-                userEmail: user.email,
-                userName: user.displayName,
-                departure,
-                vendorEmail,
-                vendorName,
-                status: 'pending'
+                basePrice: price,
+                totalPrice: price * bookedQuantity,
+                bookingDate: new Date(),
+                booking_status: 'pending',
+                bookedBy: user.email,
+                bookedQuantity,
             }
 
-            axiosSecure.post('/bookings', bookingData)
+            axiosSecure.patch(`/bookings/${id}`, bookingData)
                 .then(res => {
-                    if (res.data.insertedId) {
+                    if (res.data.modifiedCount) {
                         SwiftAlert({
                             title: "Booking Done",
                             text: "please wait for the vendor to accept your booking request"
                         })
+                        navigate('/dashboard/bookings')
                     }
                 })
         }
