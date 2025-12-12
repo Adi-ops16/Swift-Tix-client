@@ -22,12 +22,17 @@ const MyBookedTickets = () => {
     const handlePayment = async (booking) => {
         const { totalPrice, ticketName, ticketURL, bookedBy, bookedQuantity, _id, ticketId } = booking
         const paymentData = {
-            totalPrice, ticketName, ticketURL, bookedBy, bookedQuantity, ticketId,
+            totalPrice,
+            ticketName,
+            ticketURL,
+            bookedBy,
+            bookedQuantity: Number(bookedQuantity),
+            ticketId,
             booking_id: _id
         }
 
         const res = await axiosSecure.post('/create-checkout-session', paymentData)
-        window.location.href = res.data.url
+        window.location.assign(res.data.url)
     }
 
     return (
@@ -38,7 +43,7 @@ const MyBookedTickets = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {bookings?.map((booking) => {
-                    const { _id, ticketName, ticketURL, from, to, departure, transport_type, totalPrice, bookedQuantity, booking_status,
+                    const { _id, ticketId, ticketName, ticketURL, from, to, departure, transport_type, totalPrice, bookedQuantity, booking_status,
                     } = booking;
 
                     const dateTime = new Date(departure);
@@ -47,6 +52,8 @@ const MyBookedTickets = () => {
                         hour: "2-digit",
                         minute: "2-digit",
                     });
+
+                    const hasExpired = new Date(departure) < new Date()
 
                     return (
                         <div
@@ -103,28 +110,46 @@ const MyBookedTickets = () => {
                                         ${booking_status === "accepted" && "bg-green-100 text-green-700"}
                                         ${booking_status === "rejected" && "bg-red-100 text-red-700"}
                                         ${booking_status === "paid" && "bg-blue-100 text-blue-700"}
-                                    `}
-                                        >
+                                    `}>
                                             {booking_status}
                                         </span>
                                     </p>
 
-                                    <div className="mt-2">
-                                        <Countdown departure={departure} />
-                                    </div>
+                                    {booking_status !== 'rejected' &&
+                                        <div className="mt-2">
+                                            <Countdown departure={departure} />
+                                        </div>
+                                    }
+
                                 </div>
                             </div>
 
+                            <Link
+                                to={`/ticket/${ticketId}`}
+                                className=' mx-5 mb-2'
+                            >
+                                <button className='btn w-full btn-outline border-[#5b3f2d] text-[#5b3f2d] hover:bg-[#5b3f2d] hover:text-white'>
+                                    View Details <FaCircleQuestion />
+                                </button>
+                            </Link>
                             <div className="px-5 pb-5 flex gap-2">
                                 {booking_status === "accepted" ? (
                                     <button
+                                        disabled={hasExpired}
                                         onClick={() => handlePayment(booking)}
                                         className="btn w-full my-gradient hover-gradient transition-all duration-300 mb-3 flex-1"
                                     >
-                                        Pay Now
-                                        <FaStripeS />
+                                        {
+                                            hasExpired ? "Payment unavailable. The departure time has already passed." : <span className='flex gap-2 items-center'>
+                                                Pay Now
+                                                <FaStripeS />
+                                            </span>
+                                        }
                                     </button>
-                                ) :
+                                ) : booking_status === 'rejected' ?
+                                    <p className='text-gray-400'>
+                                        Sorry, your booking request has been rejected
+                                    </p> :
                                     <p className='text-gray-400'>
                                         *Please wait for the vendor to accept your booking
                                     </p>

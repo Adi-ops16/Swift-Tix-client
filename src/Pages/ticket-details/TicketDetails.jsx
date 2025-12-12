@@ -29,7 +29,8 @@ const TicketDetails = () => {
         }
     })
 
-    const { ticketName, ticketURL, departure, perks, transport_type, from, to, price, quantity, vendorEmail, vendorName, } = ticket || {}
+    const { ticketName, ticketURL, departure, perks, transport_type, from, to, price, quantity, vendorEmail, vendorName } = ticket || {}
+
 
     const dateTime = new Date(departure)
     const options = {
