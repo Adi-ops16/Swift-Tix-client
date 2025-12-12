@@ -21,6 +21,8 @@ import TicketDetails from "../Pages/ticket-details/TicketDetails";
 import UserRoute from "./UserRoute";
 import MyBookedTickets from "../Pages/dashboard/booked-tickets/MyBookedTickets";
 import RequestedBookings from "../Pages/dashboard/requested-bookings/RequestedBookings";
+import PaymentSuccess from "../Pages/dashboard/payment/PaymentSuccess";
+import PaymentCancel from "../Pages/dashboard/payment/PaymentCancel";
 
 export const router = createBrowserRouter([
     {
@@ -75,6 +77,14 @@ export const router = createBrowserRouter([
             {
                 path: 'profile',
                 Component: Profile
+            },
+            {
+                path: 'payment-success',
+                Component: PaymentSuccess
+            },
+            {
+                path: 'payment-cancel',
+                Component: PaymentCancel
             },
             // pages for users
             {

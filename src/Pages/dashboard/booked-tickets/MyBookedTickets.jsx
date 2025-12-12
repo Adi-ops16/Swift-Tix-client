@@ -19,6 +19,17 @@ const MyBookedTickets = () => {
         }
     })
 
+    const handlePayment = async (booking) => {
+        const { totalPrice, ticketName, ticketURL, bookedBy, bookedQuantity, _id, ticketId } = booking
+        const paymentData = {
+            totalPrice, ticketName, ticketURL, bookedBy, bookedQuantity, ticketId,
+            booking_id: _id
+        }
+
+        const res = await axiosSecure.post('/create-checkout-session', paymentData)
+        window.location.href = res.data.url
+    }
+
     return (
         <div className="py-10 px-4 md:px-8">
             <h2 className="text-3xl font-bold text-[#2e2e2e] mb-8 text-center">
@@ -105,14 +116,19 @@ const MyBookedTickets = () => {
                             </div>
 
                             <div className="px-5 pb-5 flex gap-2">
-                                {booking_status === "accepted" && (
+                                {booking_status === "accepted" ? (
                                     <button
+                                        onClick={() => handlePayment(booking)}
                                         className="btn w-full my-gradient hover-gradient transition-all duration-300 mb-3 flex-1"
                                     >
                                         Pay Now
                                         <FaStripeS />
                                     </button>
-                                )}
+                                ) :
+                                    <p className='text-gray-400'>
+                                        *Please wait for the vendor to accept your booking
+                                    </p>
+                                }
                             </div>
                         </div>
                     );
