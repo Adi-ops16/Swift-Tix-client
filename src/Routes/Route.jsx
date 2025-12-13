@@ -24,6 +24,7 @@ import RequestedBookings from "../Pages/dashboard/requested-bookings/RequestedBo
 import PaymentSuccess from "../Pages/dashboard/payment/PaymentSuccess";
 import PaymentCancel from "../Pages/dashboard/payment/PaymentCancel";
 import TransactionHistory from "../Pages/dashboard/transaction-history/TransactionHistory";
+import RevenueOverview from "../Pages/dashboard/revenue-overview/RevenueOverview";
 
 export const router = createBrowserRouter([
     {
@@ -136,6 +137,12 @@ export const router = createBrowserRouter([
                     <RequestedBookings></RequestedBookings>
                 </VendorRoute>
             },
+            {
+                path: 'revenue-overview',
+                element: <VendorRoute>
+                    <RevenueOverview></RevenueOverview>
+                </VendorRoute>
+            }
         ]
     }
 ])
