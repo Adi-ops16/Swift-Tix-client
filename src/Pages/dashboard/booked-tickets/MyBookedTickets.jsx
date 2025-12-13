@@ -20,15 +20,16 @@ const MyBookedTickets = () => {
     })
 
     const handlePayment = async (booking) => {
-        const { totalPrice, ticketName, ticketURL, bookedBy, bookedQuantity, _id, ticketId } = booking
+        const { ticketName, ticketURL, _id, bookings } = booking
+        const { bookedQuantity, bookingId, basePrice, bookedBy } = bookings
         const paymentData = {
-            totalPrice,
+            basePrice,
             ticketName,
             ticketURL,
             bookedBy,
             bookedQuantity: Number(bookedQuantity),
-            ticketId,
-            booking_id: _id
+            ticketId: _id,
+            bookingId
         }
 
         const res = await axiosSecure.post('/create-checkout-session', paymentData)
