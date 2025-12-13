@@ -49,10 +49,10 @@ const Navbar = () => {
     );
 
     return (
-        <div className="navbar bg-base-100 shadow-sm px-4 rounded-2xl">
-            {/* Left Section */}
+        <div className="navbar bg-base-100 shadow-sm px-4 rounded-2xl sticky top-0">
+
             <div className="navbar-start">
-                {/* Mobile Menu */}
+
                 <div className="dropdown">
                     <div
                         tabIndex={0}
@@ -74,12 +74,10 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            {/* Desktop Links */}
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">{links}</ul>
             </div>
 
-            {/* Right Section */}
             <div className="navbar-end flex items-center gap-4">
                 {user ? (
                     <div className="dropdown dropdown-end pr-3">
