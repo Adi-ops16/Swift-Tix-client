@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { FaThLarge, FaUser, FaSignOutAlt, FaUsers, FaClipboardList } from "react-icons/fa";
+import { MdOutlineReceiptLong } from "react-icons/md";
 import { IoTicket, IoBagAdd } from "react-icons/io5";
 import { LuTicketPlus } from "react-icons/lu";
 import { motion } from "framer-motion";
@@ -20,6 +21,7 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
         { to: "/dashboard/profile", label: "My Profile", icon: <FaUser /> },
         ...role === 'user' ? [
             { to: "/dashboard/bookings", label: "My Booked Tickets", icon: <IoBagAdd /> },
+            { to: "/dashboard/payment-history", label: "Transaction History", icon: <MdOutlineReceiptLong /> }
         ] : [],
 
         ...role === 'vendor' ? [

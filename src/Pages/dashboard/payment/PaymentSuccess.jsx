@@ -67,7 +67,7 @@ const PaymentSuccess = () => {
 
                 <div className="mt-8 flex gap-3 justify-center">
                     <Link
-                        to="/dashboard/my-bookings"
+                        to="/dashboard/payment-history"
                         className="px-5 py-2.5 rounded-lg bg-green-600 text-white font-medium hover:bg-green-700 transition"
                     >
                         View payment
