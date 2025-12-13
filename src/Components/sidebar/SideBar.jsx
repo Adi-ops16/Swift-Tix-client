@@ -17,7 +17,6 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
     const { role } = useRole()
 
     const menu = [
-        { to: "/dashboard", label: "Dashboard", icon: <FaThLarge /> },
         { to: "/dashboard/profile", label: "My Profile", icon: <FaUser /> },
         ...role === 'user' ? [
             { to: "/dashboard/bookings", label: "My Booked Tickets", icon: <IoBagAdd /> },

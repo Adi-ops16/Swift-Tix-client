@@ -74,7 +74,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: DashboardHome
+                Component: Profile
             },
             {
                 path: 'profile',

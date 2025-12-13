@@ -39,7 +39,7 @@ const Navbar = () => {
             </li>
             <li>
                 <NavLink
-                    to="/dashboard"
+                    to="/dashboard/profile"
                     className="flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all duration-300 hover:text-primary hover:bg-base-200 mr-2"
                 >
                     <LuLayoutDashboard /> Dashboard
