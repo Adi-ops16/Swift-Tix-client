@@ -62,7 +62,7 @@ const Footer = () => {
             </div>
 
             <div className="border-t border-[#e0d8d0] py-5 text-center text-gray-500 text-sm">
-                © {new Date().getFullYear()} TicketHub. All rights reserved.
+                © {new Date().getFullYear()} Swift-Tix. All rights reserved.
             </div>
         </footer>
     );
