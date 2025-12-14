@@ -82,6 +82,12 @@ const LatestTickets = () => {
                                         {ticket.quantity}
                                     </p>
                                 </div>
+                                <div className="flex justify-between items-center">
+                                    <p className="text-lg font-semibold text-[#5b3f2d] flex items-center gap-4">
+                                        Perks:
+                                        {ticket.perks.map(p => <span className="text-sm font-normal text-black">{p}</span>)}
+                                    </p>
+                                </div>
 
                             </div>
                             {/* Button */}

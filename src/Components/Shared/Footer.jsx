@@ -51,11 +51,10 @@ const Footer = () => {
 
                 <div>
                     <h6 className="text-lg font-semibold text-[#2e2e2e] mb-4">
-                        Legal
+                        Payment Method
                     </h6>
                     <ul className="space-y-2 text-gray-600">
-                        <li className="hover:text-[#5b3f2d] transition">Terms & Conditions</li>
-                        <li className="hover:text-[#5b3f2d] transition">Privacy Policy</li>
+                        <li className="hover:text-[#5b3f2d] transition">Stripe</li>
                     </ul>
                 </div>
 

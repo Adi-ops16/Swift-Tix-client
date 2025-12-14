@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
 import { imageUpload } from "../../../utils/imageUpload";
 import SwiftAlert from "../../../utils/alerts/SwiftAlert";
-import SmallLoader from "../../../Components/Loading/smallLoader";
+import SmallLoader from "../../../Components/Loading/SmallLoader";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SwiftConfirm from "../../../utils/alerts/SwiftConfirm";
 import { useNavigate } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 
 const AddTicket = () => {
     const [isPending, setIsPending] = useState(false)
@@ -86,6 +87,16 @@ const AddTicket = () => {
             setIsPending(false)
         }
     };
+
+    const { data: isFraud } = useQuery({
+        queryKey: ['fraud'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`fraud?${user?.email}`)
+            return res.data.isFraud;
+        }
+    })
+
+    console.log(isFraud)
 
     return (
         <div className="min-h-[calc(100vh-150px)] flex justify-center items-center p-4">
@@ -249,9 +260,11 @@ const AddTicket = () => {
                     {/* Submit */}
                     <div className="col-span-1 md:col-span-2 mt-4">
                         <button
+                            disabled={isFraud}
                             type="submit"
-                            className="w-full py-3 rounded-xl font-bold text-white bg-linear-to-r from-primary to-secondary hover:opacity-90 transition">
-                            {isPending ? <SmallLoader /> : "Add ticket"}
+                            className={`w-full py-3 rounded-xl font-bold ${isFraud ? "btn btn-outline" : ""}`}>
+                            {isFraud ? "You are a fraud" :
+                                isPending ? <SmallLoader /> : "Add ticket"}
                         </button>
                     </div>
 

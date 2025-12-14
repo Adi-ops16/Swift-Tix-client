@@ -5,7 +5,6 @@ import { Switch } from '@headlessui/react';
 import { FaBullhorn } from "react-icons/fa";
 import SwiftAlert from '../../../utils/alerts/SwiftAlert';
 import SwiftConfirm from '../../../utils/alerts/SwiftConfirm';
-import SmallLoader from '../../../Components/Loading/smallLoader';
 import Loading from '../../../Components/Loading/Loading';
 
 const AdvertiseTickets = () => {
@@ -76,37 +75,43 @@ const AdvertiseTickets = () => {
                     </thead>
 
                     <tbody>
-                        {tickets.map((ticket, index) => {
-                            const { _id, ticketName, price, vendorEmail, transport_type, advertise } = ticket
-                            return (
-                                <tr
-                                    key={_id}
-                                    className="border-t hover:bg-gray-50 transition"
-                                >
-                                    <td className="py-3 px-4">{index + 1}</td>
-                                    <td className="py-3 px-4 font-medium">{ticketName}</td>
-                                    <td className="py-3 px-4">{transport_type}</td>
-                                    <td className="py-3 px-4 font-semibold">${price}</td>
-                                    <td className="py-3 px-4">{vendorEmail}</td>
+                        {tickets.length === 0 ?
+                            <tr>
+                                <td colSpan={6} className='text-center py-4 font-semibold'>There is no tickets available</td>
+                            </tr>
+                            :
+                            tickets.map((ticket, index) => {
+                                const { _id, ticketName, price, vendorEmail, transport_type, advertise } = ticket
+                                return (
+                                    <tr
+                                        key={_id}
+                                        className="border-t hover:bg-gray-50 transition"
+                                    >
+                                        <td className="py-3 px-4">{index + 1}</td>
+                                        <td className="py-3 px-4 font-medium">{ticketName}</td>
+                                        <td className="py-3 px-4">{transport_type}</td>
+                                        <td className="py-3 px-4 font-semibold">${price}</td>
+                                        <td className="py-3 px-4">{vendorEmail}</td>
 
-                                    <td className="py-3 px-4 text-center">
-                                        <Switch
-                                            checked={advertise}
-                                            onChange={async () =>
-                                                await mutateAsync({ id: _id, advertise: !advertise })
-                                            }
-                                            className={`${ticket.advertise ? 'bg-green-600' : 'bg-gray-300'} relative inline-flex h-6 w-11 items-center rounded-full transition`}
-                                        >
-                                            <span
-                                                className={`${ticket.advertise ? 'translate-x-6' : 'translate-x-1'} inline-block h-4 w-4 transform rounded-full bg-white transition`}>
-                                            </span>
+                                        <td className="py-3 px-4 text-center">
+                                            <Switch
+                                                checked={advertise}
+                                                onChange={async () =>
+                                                    await mutateAsync({ id: _id, advertise: !advertise })
+                                                }
+                                                className={`${ticket.advertise ? 'bg-green-600' : 'bg-gray-300'} relative inline-flex h-6 w-11 items-center rounded-full transition`}
+                                            >
+                                                <span
+                                                    className={`${ticket.advertise ? 'translate-x-6' : 'translate-x-1'} inline-block h-4 w-4 transform rounded-full bg-white transition`}>
+                                                </span>
 
-                                        </Switch>
-                                    </td>
-                                </tr>
+                                            </Switch>
+                                        </td>
+                                    </tr>
+                                )
+                            }
                             )
                         }
-                        )}
                     </tbody>
                 </table>
             </div>

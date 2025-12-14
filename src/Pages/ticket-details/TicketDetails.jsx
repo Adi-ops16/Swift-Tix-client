@@ -11,9 +11,11 @@ import SwiftConfirm from '../../utils/alerts/SwiftConfirm.jsx';
 import SwiftAlert from '../../utils/alerts/SwiftAlert.jsx';
 import useAuth from '../../Hooks/useAuth.jsx';
 import SmallLoader from '../../Components/Loading/SmallLoader.jsx';
+import useRole from '../../Hooks/useRole.jsx';
 
 const TicketDetails = () => {
     const { id } = useParams()
+    const { role } = useRole()
     const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
@@ -88,7 +90,7 @@ const TicketDetails = () => {
     }
 
     return (
-        <section className="py-5 md:py-16 bg-[#faf9f7] min-h-screen">
+        <section className="py-5 md:py-16 min-h-screen">
             <div className="max-w-6xl mx-auto px-4 md:px-8">
                 <h2
                     className="text-3xl md:text-4xl font-extrabold text-center text-[#2e2e2e] mb-5 md:mb-10"
@@ -166,12 +168,12 @@ const TicketDetails = () => {
                         </div>
 
                         <div className='flex flex-row justify-between items-center'>
-                            <button
+                            {role === 'user' && <button
                                 onClick={() => setIsOpen(true)}
                                 disabled={quantity <= 0 || isExpired}
                                 className='btn my-gradient hover-gradient'>
                                 Book Now <FaCalendarAlt />
-                            </button>
+                            </button>}
 
                             <button
                                 onClick={() => navigate(-1)}

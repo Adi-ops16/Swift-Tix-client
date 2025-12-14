@@ -9,10 +9,12 @@ const axiosSecure = axios.create({
 
 
 const useAxiosSecure = () => {
-    const { user, logOut } = useAuth()
+    const { user, logOut, loading } = useAuth()
     const navigate = useNavigate()
 
     useEffect(() => {
+
+        if (loading) return
 
         // request interceptor
         const reqInterceptor = axiosSecure.interceptors.request.use(config => {
@@ -39,7 +41,7 @@ const useAxiosSecure = () => {
             axiosSecure.interceptors.request.eject(reqInterceptor)
             axiosSecure.interceptors.response.eject(resInterceptor)
         }
-    }, [user, logOut, navigate])
+    }, [user, logOut, navigate, loading])
 
     return axiosSecure
 };

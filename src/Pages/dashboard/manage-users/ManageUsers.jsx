@@ -72,7 +72,7 @@ const ManageUsers = () => {
         })
         if (result.isConfirmed) {
             const res = await axiosSecure.patch(`/fraud?email=${email}`)
-            if (res.data.modifiedCount) {
+            if (res.data.acknowledged) {
                 SwiftAlert({
                     title: `Success`,
                     text: `Marked ${user?.displayName} as fraud`
@@ -109,7 +109,7 @@ const ManageUsers = () => {
                                     const isVendor = user.role === "vendor";
                                     const isUser = user.role === "user";
 
-                                    const { _id, photoURL, displayName, email, role } = user || {}
+                                    const { _id, photoURL, displayName, email, role, isFraud } = user || {}
 
                                     return (
                                         <tr key={_id} className="hover:bg-oklch-96 transition">
@@ -176,19 +176,22 @@ const ManageUsers = () => {
 
                                                     {isVendor && (
                                                         <>
-                                                            <button
-                                                                onClick={() => handleUserRole(user, 'admin')}
-                                                                className="px-3 py-1 rounded-lg my-gradient hover-gradient text-white text-sm flex items-center gap-2 shadow cursor-pointer">
-                                                                <MdAdminPanelSettings size={18} />
-                                                                Make Admin
-                                                            </button>
+                                                            {isFraud ? <p>This person is a fraud</p> : <>
+                                                                <button
+                                                                    onClick={() => handleUserRole(user, 'admin')}
+                                                                    className="px-3 py-1 rounded-lg my-gradient hover-gradient text-white text-sm flex items-center gap-2 shadow cursor-pointer">
+                                                                    <MdAdminPanelSettings size={18} />
+                                                                    Make Admin
+                                                                </button>
 
-                                                            <button
-                                                                onClick={() => handleFraud(user)}
-                                                                className="px-3 py-1 rounded-lg bg-red-500 text-white text-sm hover:bg-red-600 flex items-center gap-2 shadow cursor-pointer">
-                                                                <BiSolidError size={18} />
-                                                                Mark as Fraud
-                                                            </button>
+                                                                <button
+                                                                    onClick={() => handleFraud(user)}
+                                                                    className="px-3 py-1 rounded-lg bg-red-500 text-white text-sm hover:bg-red-600 flex items-center gap-2 shadow cursor-pointer">
+                                                                    <BiSolidError size={18} />
+                                                                    Mark as Fraud
+                                                                </button>
+                                                            </>
+                                                            }
                                                         </>
                                                     )}
 
