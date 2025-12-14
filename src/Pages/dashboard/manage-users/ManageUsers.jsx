@@ -64,6 +64,23 @@ const ManageUsers = () => {
 
     }
 
+    const handleFraud = async (user) => {
+        const email = user?.email;
+        const result = await SwiftConfirm({
+            title: `Are you sure?`,
+            text: `you want to mark ${user?.displayName} as fraud?`
+        })
+        if (result.isConfirmed) {
+            const res = await axiosSecure.patch(`/fraud?email=${email}`)
+            if (res.data.modifiedCount) {
+                SwiftAlert({
+                    title: `Success`,
+                    text: `Marked ${user?.displayName} as fraud`
+                })
+            }
+        }
+    }
+
     return (
         <div className="min-h-screen px-4 py-10 bg-oklch-95">
             <h2 className="text-4xl font-bold mb-8 text-center">
@@ -166,7 +183,9 @@ const ManageUsers = () => {
                                                                 Make Admin
                                                             </button>
 
-                                                            <button className="px-3 py-1 rounded-lg bg-red-500 text-white text-sm hover:bg-red-600 flex items-center gap-2 shadow cursor-pointer">
+                                                            <button
+                                                                onClick={() => handleFraud(user)}
+                                                                className="px-3 py-1 rounded-lg bg-red-500 text-white text-sm hover:bg-red-600 flex items-center gap-2 shadow cursor-pointer">
                                                                 <BiSolidError size={18} />
                                                                 Mark as Fraud
                                                             </button>

@@ -10,7 +10,7 @@ const NewsLetter = () => {
         })
     }
     return (
-        <section className="py-16 my-10 bg-[#f9faf9]">
+        <section className="py-16 bg-[#f9faf9] overflow-hidden">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div

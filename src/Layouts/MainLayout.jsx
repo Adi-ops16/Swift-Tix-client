@@ -28,7 +28,9 @@ const MainLayout = () => {
             <div className='flex-1 overflow-x-hidden'>
                 <Outlet></Outlet>
             </div>
-            <Footer></Footer>
+            <div>
+                <Footer></Footer>
+            </div>
         </div>
     );
 };

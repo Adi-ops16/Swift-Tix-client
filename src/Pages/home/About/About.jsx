@@ -4,7 +4,7 @@ import about from "../../../assets/about.jpg";
 
 const About = () => {
     return (
-        <section className="bg-[#f9faf9] py-16 my-10">
+        <section className="bg-[#f9faf9] py-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
 
                 <div

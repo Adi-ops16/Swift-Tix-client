@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxios from '../../Hooks/useAxios';
 import { Link } from 'react-router';
 import { FaQuestionCircle, FaBus, FaTrain, FaPlane, FaShip } from "react-icons/fa";
+import SmallLoader from '../../Components/Loading/SmallLoader';
 
 const getTransportIcon = (type) => {
     switch (type?.toLowerCase()) {
@@ -27,12 +28,14 @@ const AllTickets = () => {
         keepPreviousData: true,
     });
 
-    const { tickets = [], total = 0, totalPages = 1 } = ticketData;
+    const { tickets = [], totalPages = 1  } = ticketData;
 
-    if (isLoading) return <p className="text-center py-20">Loading tickets...</p>;
+    if (isLoading) return <p className="text-center py-20">
+        <SmallLoader/>
+    </p>;
 
     return (
-        <section className="py-16 bg-[#faf9f7] min-h-screen">
+        <section className="pt-10 my-10 min-h-screen">
             <div className="max-w-7xl mx-auto px-4 md:px-8">
                 <h2 className="text-3xl md:text-4xl font-extrabold text-center text-[#2e2e2e] mb-12">
                     All Available Tickets
@@ -87,7 +90,7 @@ const AllTickets = () => {
                     })}
                 </div>
 
-                <div className="flex justify-center items-center gap-4 mt-10">
+                <div className="flex justify-center items-center my-5 gap-4">
                     <button
                         className="btn btn-outline"
                         disabled={page <= 1}
