@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import useAxios from '../../Hooks/useAxios';
 import { Link } from 'react-router';
 import { FaQuestionCircle, FaBus, FaTrain, FaPlane, FaShip } from "react-icons/fa";
-import SmallLoader from '../../Components/Loading/SmallLoader';
 import noData from '../../animations/socialv no data.json'
 import Lottie from 'lottie-react';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const getTransportIcon = (type) => {
     switch (type?.toLowerCase()) {
@@ -19,23 +18,18 @@ const getTransportIcon = (type) => {
 
 const AllTickets = () => {
     const [page, setPage] = useState(1);
-    const axios = useAxios();
+    const axiosSecure = useAxiosSecure();
 
-    const { data: ticketData = {}, isLoading } = useQuery({
+    const { data: ticketData = {} } = useQuery({
         queryKey: ['all-tickets', page],
         queryFn: async () => {
-            const res = await axios.get(`/all-tickets?status=accepted&page=${page}`);
+            const res = await axiosSecure.get(`/all-tickets?status=accepted&page=${page}`);
             return res.data;
         },
         keepPreviousData: true,
     });
 
     const { tickets = [], totalPages = 1 } = ticketData;
-
-    if (isLoading) return <p className="text-center py-20">
-        <SmallLoader />
-    </p>;
-
 
 
     return (

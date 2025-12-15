@@ -178,7 +178,6 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
                 </div>
             </div>
 
-            {/* MOBILE BACKDROP */}
             {mobileOpen && (
                 <div
                     className="fixed inset-0 bg-black/40 z-40 lg:hidden"

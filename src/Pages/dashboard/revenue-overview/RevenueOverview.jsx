@@ -54,6 +54,10 @@ const RevenueOverview = () => {
         requestAnimationFrame(animate);
     }, [totalRevenue, totalTicketsSold, totalTicketsAdded]);
 
+    if (!data) {
+        return null
+    }
+
     if (isLoading) {
         return (
             <div className="flex justify-center items-center min-h-[40vh]">
@@ -100,7 +104,7 @@ const RevenueOverview = () => {
                     </div>
                 </div>
 
-                <div className="h-64 rounded-xl bg-base-200/40 p-3">
+                <div className="h-64 min-h-64 rounded-xl bg-base-200/40 p-3">
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart
                             data={[
@@ -128,13 +132,7 @@ const RevenueOverview = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                 {/* Tickets Sold */}
-                <div className="
-                bg-base-100
-                rounded-3xl
-                shadow-md
-                p-6
-                transition-all
-                hover:shadow-xl">
+                <div className=" bg-base-100 rounded-3xl shadow-md p-6 transition-all hover:shadow-xl">
                     <div className="flex items-center justify-between mb-4">
                         <div>
                             <p className="text-sm text-base-content/60">
@@ -171,13 +169,7 @@ const RevenueOverview = () => {
                     </div>
                 </div>
 
-                <div className="
-                bg-base-100
-                rounded-3xl
-                shadow-md
-                p-6
-                transition-all
-                hover:shadow-xl">
+                <div className=" bg-base-100 rounded-3xl shadow-md p-6 transition-all hover:shadow-xl">
                     <div className="flex items-center justify-between mb-4">
                         <div>
                             <p className="text-sm text-base-content/60">
@@ -192,7 +184,7 @@ const RevenueOverview = () => {
                         </span>
                     </div>
 
-                    <div className="h-56 bg-base-200/40 rounded-xl p-3">
+                    <div className="h-56 min-h-56 bg-base-200/40 rounded-xl p-3">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart
                                 data={[

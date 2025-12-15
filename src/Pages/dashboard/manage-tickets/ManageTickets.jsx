@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAxios from "../../../Hooks/useAxios";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import NotFound from "../../../Components/not-found/NotFound";
@@ -12,13 +11,12 @@ import Loading from "../../../Components/Loading/Loading";
 
 const ManageTickets = () => {
     const [isPending, setIsPending] = useState(false)
-    const axios = useAxios();
     const axiosSecure = useAxiosSecure()
 
     const { data: tickets = [], refetch, isLoading } = useQuery({
         queryKey: ["tickets"],
         queryFn: async () => {
-            const res = await axios.get("/tickets");
+            const res = await axiosSecure.get("/tickets");
             return res.data;
         },
     });

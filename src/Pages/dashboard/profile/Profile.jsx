@@ -8,12 +8,14 @@ import { imageUpload } from "../../../utils/imageUpload";
 import SwiftConfirm from "../../../utils/alerts/SwiftConfirm";
 import SwiftAlert from "../../../utils/alerts/SwiftAlert";
 import SmallLoader from "../../../Components/Loading/smallLoader";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Profile = () => {
     const [isPending, setIsPending] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
+    const axiosSecure = useAxiosSecure()
     const { user, updateUserInfo, setLoading } = useAuth();
     const { role } = useRole()
-    const [isOpen, setIsOpen] = useState(false);
 
     const {
         register,
@@ -51,6 +53,7 @@ const Profile = () => {
             if (result.isConfirmed) {
                 updateUserInfo(updatedProfileInfo)
                     .then(() => {
+                        axiosSecure.patch(`/users?email=${user?.email}`, updatedProfileInfo)
                         setLoading(false)
                         SwiftAlert({
                             title: "Successful",

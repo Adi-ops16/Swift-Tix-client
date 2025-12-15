@@ -17,10 +17,6 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
 
     const { _id, ticketName, from, to, price, quantity, departure, perks, transport_type, ticketURL } = ticket || {};
 
-
-    console.log({ price, quantity, ticketName, _id })
-
-
     const { mutateAsync, reset, isPending, isError } = useMutation({
         mutationFn: async (payload) => axiosSecure.patch(`/tickets/update/${_id}`, payload),
         onSuccess: () => {
@@ -71,7 +67,6 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
                 quantity: Number(quantity),
             }
 
-            console.log(updatedTicketInfo)
             const result = await SwiftConfirm({
                 title: "Save changes?",
                 text: "Are you sure you want to save these changes? You won't be able to revert this.",
@@ -118,7 +113,7 @@ const UpdateTicketsModal = ({ ticket, isOpen, setIsOpen, refetch }) => {
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.9 }}
                             transition={{ duration: 0.25, ease: 'easeOut' }}
-                            className="max-w-xl w-full bg-white rounded-2xl shadow-xl p-8 space-y-6"
+                            className="max-w-xl w-full bg-white rounded-2xl shadow-xl p-8 space-y-6 max-h-[90vh] overflow-y-auto"
                         >
                             <DialogTitle className="text-2xl font-bold text-gray-800">
                                 Update Ticket

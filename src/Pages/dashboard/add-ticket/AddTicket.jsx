@@ -96,8 +96,6 @@ const AddTicket = () => {
         }
     })
 
-    console.log(isFraud)
-
     return (
         <div className="min-h-[calc(100vh-150px)] flex justify-center items-center p-4">
             <div className="card w-full max-w-2xl shadow-xl p-6 rounded-2xl border border-gray-200">
@@ -257,12 +255,11 @@ const AddTicket = () => {
                         </div>
                     </div>
 
-                    {/* Submit */}
                     <div className="col-span-1 md:col-span-2 mt-4">
                         <button
                             disabled={isFraud}
                             type="submit"
-                            className={`w-full py-3 rounded-xl font-bold ${isFraud ? "btn btn-outline" : ""}`}>
+                            className={`w-full py-3 rounded-xl font-bold ${isFraud ? "btn btn-outline" : "my-gradient hover-gradient"}`}>
                             {isFraud ? "You are a fraud" :
                                 isPending ? <SmallLoader /> : "Add ticket"}
                         </button>
