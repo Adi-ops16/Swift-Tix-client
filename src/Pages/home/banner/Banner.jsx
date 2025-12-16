@@ -8,7 +8,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Link } from 'react-router';
 
-const Banner = () => {
+const Banner = ({ scrollToAbout }) => {
 
     const banners = [
         {
@@ -26,7 +26,7 @@ const Banner = () => {
             description:
                 "Book your tickets instantly with secure and fast Stripe payment — ensuring a smoother travel experience.",
             btn: "Book Now",
-            to: ''
+            to: '/dashboard/bookings'
         },
         {
             id: 3,
@@ -61,10 +61,8 @@ const Banner = () => {
                                 backgroundPosition: "center",
                             }}
                         >
-                            {/* Gradient Overlay */}
                             <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/30 to-transparent"></div>
 
-                            {/* Text Content */}
                             <div className="absolute inset-0 flex items-center justify-start">
                                 <div className="text-white max-w-md pl-10">
                                     <h1 className="text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-lg">
@@ -75,9 +73,17 @@ const Banner = () => {
                                         {banner.description}
                                     </p>
 
-                                    <button className="mt-6 px-6 py-3 rounded-xl bg-primary text-white font-semibold shadow-md hover:bg-primary/80 transition">
-                                        <Link to={banner.to}>{banner.btn}</Link>
-                                    </button>
+                                    {banner.btn === 'About us' ?
+                                        <button onClick={scrollToAbout} className='btn mt-5 my-gradient hover-gradient border-primary cursor-pointer'>
+                                            {banner.btn}
+                                        </button>
+                                        :
+                                        <Link to={banner.to}>
+                                            <button
+                                                className='btn mt-5 my-gradient hover-gradient border-primary cursor-pointer'>
+                                                {banner.btn}
+                                            </button>
+                                        </Link>}
                                 </div>
                             </div>
                         </div>

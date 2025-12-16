@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { FaThLarge, FaUser, FaSignOutAlt, FaUsers, FaClipboardList, FaChartLine } from "react-icons/fa";
 import { MdOutlineReceiptLong } from "react-icons/md";
 import { IoTicket, IoBagAdd } from "react-icons/io5";
@@ -13,7 +13,6 @@ import SwiftAlert from "../../utils/alerts/SwiftAlert";
 const SideBar = ({ isExpanded, setIsExpanded }) => {
     const { user, logOut } = useAuth();
     const [mobileOpen, setMobileOpen] = useState(false);
-
     const { role } = useRole()
 
     const menu = [
@@ -37,12 +36,13 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
         ] : []
     ];
 
+    const navigate = useNavigate()
 
     const handleLogOut = () => {
-        console.log("log out button clicked")
         setMobileOpen(false)
         logOut()
             .then(() => {
+                navigate('/')
                 SwiftAlert({
                     title: "LogOut successful",
                     text: " "
@@ -62,7 +62,6 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
                 transition={{ type: "spring", stiffness: 260, damping: 30 }}
                 className="hidden lg:flex lg:flex-col lg:fixed lg:left-0 lg:top-0 lg:h-screen lg:bg-base-200 lg:border-r lg:border-base-200 lg:z-50"
             >
-                {/* LOGO AREA */}
                 <div className="px-4 py-4 flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
                         <Logo></Logo>
@@ -75,7 +74,6 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
                     )}
                 </div>
 
-                {/* MENU */}
                 <nav className="flex-1 mt-4 px-2">
                     <ul className="flex flex-col gap-1">
                         {menu.map((m) => (
@@ -94,7 +92,6 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
                     </ul>
                 </nav>
 
-                {/* FOOTER */}
                 <div className="px-3 pb-6 border-t border-base-300 pt-4">
                     <div className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-base-300">
                         <img
@@ -123,21 +120,17 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
 
             <div className="lg:hidden fixed top-0 left-0 w-full h-16 bg-base-200 border-b border-base-300 z-40 flex items-center justify-between px-4">
 
-                {/* Hamburger */}
                 <button onClick={() => setMobileOpen(true)} className="btn btn-ghost btn-sm">
                     ☰
                 </button>
 
-                {/* Logo */}
                 <Link to="/" className="font-bold text-lg">
                     <Logo />
                 </Link>
 
-                {/* Help Button */}
-                <button className="btn btn-ghost btn-sm">Help</button>
+                <Link to="/" className="btn btn-ghost btn-sm">Help</Link>
             </div>
 
-            {/* MOBILE DRAWER */}
             <div
                 className={`fixed inset-y-0 left-0 w-64 bg-base-200 border-r border-base-300 z-50 transform transition-transform duration-300 lg:hidden ${mobileOpen ? "translate-x-0" : "-translate-x-full"}`}>
                 <div className="p-4 pt-20">
@@ -149,7 +142,6 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
                         ✕
                     </button>
 
-                    {/* Mobile Menu */}
                     <nav className="mt-4">
                         <ul className="flex flex-col gap-3">
                             {menu.map((m) => (

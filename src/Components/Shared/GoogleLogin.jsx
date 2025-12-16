@@ -17,7 +17,6 @@ const GoogleLogin = ({ title, state }) => {
         setIsPending(true)
         signInWithGoogle()
 
-
             .then(async res => {
 
                 const displayName = res.user.displayName

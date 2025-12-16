@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import useAuth from './useAuth';
 import { useNavigate } from 'react-router';
 
+
 const axiosSecure = axios.create({
     baseURL: 'https://swift-tix-server.vercel.app/'
 })
@@ -13,8 +14,6 @@ const useAxiosSecure = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-
-        if (loading) return
 
         // request interceptor
         const reqInterceptor = axiosSecure.interceptors.request.use(config => {

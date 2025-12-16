@@ -36,12 +36,10 @@ const LatestTickets = () => {
         <section className="py-16 bg-white">
             <div className="max-w-7xl mx-auto px-4 md:px-8">
 
-                {/* Section Title */}
                 <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-[#2e2e2e]">
                     ✨ Latest Tickets
                 </h2>
 
-                {/* Grid Container */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
                     {latestTickets.map((ticket, index) => (
@@ -85,7 +83,7 @@ const LatestTickets = () => {
                                 <div className="flex justify-between items-center">
                                     <p className="text-lg font-semibold text-[#5b3f2d] flex items-center gap-4">
                                         Perks:
-                                        {ticket.perks.map(p => <span className="text-sm font-normal text-black">{p}</span>)}
+                                        {ticket.perks.map((p, i) => <span key={i} className="text-sm font-normal text-black">{p}</span>)}
                                     </p>
                                 </div>
 

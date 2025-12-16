@@ -40,7 +40,7 @@ const Login = () => {
             console.log(err)
             SwiftAlert({
                 title: "Login failed",
-                text: err.message || "something went wrong",
+                text: err.code || "something went wrong",
                 icon: "error"
             })
         }
@@ -52,7 +52,7 @@ const Login = () => {
     return (
         <div className="min-h-[calc(100vh-100px)] flex flex-col md:flex-row items-center justify-center px-6 gap-6 md:gap-10">
 
-            <div className="w-full md:w-1/2 flex justify-center items-center">
+            <div className="z-10 w-full md:w-1/2 flex justify-center items-center">
                 <Lottie
                     animationData={loginAnimation}
                     className="max-w-[420px] w-full"

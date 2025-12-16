@@ -48,7 +48,7 @@ const Advertisement = () => {
                 return <FaBusAlt />;
         }
     };
-
+    const enableLoop = tickets.length >= 7
     return (
         <section className="py-16 bg-white">
             <div data-aos="fade up" className="max-w-7xl mx-auto px-4 md:px-8">
@@ -64,8 +64,8 @@ const Advertisement = () => {
                     modules={[Pagination, Autoplay, EffectCoverflow]}
                     spaceBetween={50}
                     slidesPerView={1}
-                    centeredSlides={true}
-                    loop={tickets.length > 1}
+                    centeredSlides
+                    loop={enableLoop}
                     autoplay={{
                         delay: 3500,
                         disableOnInteraction: false,
@@ -110,7 +110,7 @@ const Advertisement = () => {
                                     <div className="flex justify-between items-center">
                                         <p className="text-lg font-semibold text-[#5b3f2d] flex items-center gap-4">
                                             Perks:
-                                            {ticket.perks.map(p => <span className="text-sm font-normal text-black">{p}</span>)}
+                                            {ticket.perks.map((p, i) => <span key={i} className="text-sm font-normal text-black">{p}</span>)}
                                         </p>
                                     </div>
                                     <div className="flex justify-between items-center">
