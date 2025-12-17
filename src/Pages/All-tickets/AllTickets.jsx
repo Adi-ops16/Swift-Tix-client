@@ -18,6 +18,12 @@ const getTransportIcon = (type) => {
 
 const AllTickets = () => {
     const [page, setPage] = useState(1);
+    const [filters, setFilters] = useState({
+        transport: "",
+        from: "",
+        to: "",
+        sort: ""
+    })
     const axiosSecure = useAxiosSecure();
 
     const { data: ticketData = {} } = useQuery({
@@ -30,6 +36,17 @@ const AllTickets = () => {
     });
 
     const { tickets = [], totalPages = 1 } = ticketData;
+
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+
+        setFilters(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    }
+
+    console.log(filters)
 
 
     return (
@@ -47,6 +64,83 @@ const AllTickets = () => {
                         <h2 className="text-3xl md:text-4xl font-extrabold text-center text-[#2e2e2e] mb-12">
                             All Available Tickets
                         </h2>
+
+
+                        {/* ticket sorting options */}
+                        <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-end gap-4">
+
+                            {/* Transport Type */}
+                            <div className="flex flex-col gap-1">
+                                <label className="text-xs font-medium text-base-content/70">
+                                    Transport Type
+                                </label>
+                                <select
+                                    name='transport'
+                                    value={filters.transport}
+                                    onChange={handleFilterChange}
+                                    className="select select-ghost select-sm border-primary/80 focus:outline-primary/30"
+                                >
+                                    <option value="" disabled>
+                                        All Types
+                                    </option>
+                                    <option value="plane">Plane</option>
+                                    <option value="bus">Bus</option>
+                                    <option value="train">Train</option>
+                                    <option value="launch">Launch</option>
+                                </select>
+                            </div>
+
+                            {/* From Location */}
+                            <div className="flex flex-col gap-1">
+                                <label className="text-xs font-medium text-base-content/70">
+                                    From
+                                </label>
+                                <input
+                                    name="from"
+                                    value={filters.from}
+                                    onChange={handleFilterChange}
+                                    type="text"
+                                    placeholder="Departure"
+                                    className="input input-ghost input-sm border-primary/80 focus:outline-primary/30"
+                                />
+                            </div>
+
+                            {/* To Location */}
+                            <div className="flex flex-col gap-1">
+                                <label className="text-xs font-medium text-base-content/70">
+                                    To
+                                </label>
+                                <input
+                                    name="to"
+                                    value={filters.to}
+                                    onChange={handleFilterChange}
+                                    type="text"
+                                    placeholder="Destination"
+                                    className="input input-ghost input-sm border-primary/80 focus:outline-primary/30"
+                                />
+                            </div>
+
+                            {/* Price Sort */}
+                            <div className="flex flex-col gap-1">
+                                <label className="text-xs font-medium text-base-content/70">
+                                    Sort by Price
+                                </label>
+                                <select
+                                    name="sort"
+                                    value={filters.sort}
+                                    onChange={handleFilterChange}
+                                    className="select select-ghost select-sm border-primary/80 focus:outline-primary/30"
+                                >
+                                    <option value="" disabled>
+                                        Select
+                                    </option>
+                                    <option value="asc">Low → High</option>
+                                    <option value="desc">High → Low</option>
+                                </select>
+                            </div>
+
+                        </div>
+
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                             {tickets.map(ticket => {
@@ -98,6 +192,7 @@ const AllTickets = () => {
                         </div>
                     </>}
 
+                {/* page number */}
                 <div className="flex justify-center items-center my-5 gap-4">
                     <button
                         className="btn btn-outline"

@@ -71,7 +71,7 @@ const LatestTickets = () => {
                                 <div className="flex justify-between items-center">
 
                                     <p className="text-lg font-semibold text-[#5b3f2d]">
-                                        💰 TK {ticket.price}
+                                        💰 $ {ticket.price}
                                         <span className="text-sm text-gray-500"> / per unit</span>
                                     </p>
 

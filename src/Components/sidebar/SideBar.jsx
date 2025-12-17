@@ -128,7 +128,7 @@ const SideBar = ({ isExpanded, setIsExpanded }) => {
                     <Logo />
                 </Link>
 
-                <Link to="/" className="btn btn-ghost btn-sm">Help</Link>
+                <Link to="/" className="btn btn-ghost btn-sm">Home</Link>
             </div>
 
             <div
