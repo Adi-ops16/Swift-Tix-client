@@ -30,6 +30,7 @@ const AllTickets = () => {
     const debouncedTo = useDebounce(filters.to, 1000)
     const axiosSecure = useAxiosSecure();
 
+    // data fetching
     const { data: ticketData = {}, isPending } = useQuery({
         queryKey: ['all-tickets',
             page,
@@ -56,6 +57,8 @@ const AllTickets = () => {
 
     const { tickets = [], totalPages = 1 } = ticketData;
 
+
+    // event handler
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
 
@@ -63,6 +66,7 @@ const AllTickets = () => {
             ...prev,
             [name]: value
         }));
+        setPage(1)
     }
 
     return (
