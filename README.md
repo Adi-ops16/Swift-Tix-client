@@ -4,7 +4,7 @@
 
 **Swift-Tix** is a full‑stack **Online Ticket Booking Platform** built with the **MERN stack**. The application enables users to discover, book, and securely pay for travel tickets including **Bus, Train, Launch, and Plane** services. It features a robust **role‑based system** (User, Vendor, Admin), real‑world booking workflows, and a modern UI.
 
-🔗 **Live Site:** [https://your-live-site-link.com](https://your-live-site-link.com)
+🔗 **Live Site:** [https://assignment-11-2501.web.app/]
 
 ---
 
