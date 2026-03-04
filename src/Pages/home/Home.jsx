@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import Advertisement from './advertisement/Advertisement';
+import Advertisement from './featured-tickets/Advertisement';
 import Banner from './banner/Banner';
 import LatestTickets from './latest-tickets/LatestTickets';
 import Partners from './partners/Partners';

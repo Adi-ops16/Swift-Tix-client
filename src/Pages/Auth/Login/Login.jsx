@@ -14,8 +14,19 @@ const Login = () => {
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors }
     } = useForm();
+
+    const handleAutofill = (role) => {
+        if (role === "vendor") {
+            setValue("email", "vendor@gmail.com");
+            setValue("password", "Vendor123");
+        } else if (role === "admin") {
+            setValue("email", "admin@gmail.com");
+            setValue("password", "Admin123");
+        }
+    };
 
     const { login } = useAuth()
 
@@ -73,6 +84,24 @@ const Login = () => {
                         <p className="text-base-content/70 mt-1">
                             Login to continue your SwiftTix journey
                         </p>
+                    </div>
+
+                    {/* Autofill Buttons */}
+                    <div className="flex gap-3 mb-4">
+                        <button
+                            type="button"
+                            onClick={() => handleAutofill("vendor")}
+                            className="flex-1 py-2 px-3 rounded-xl border-2 border-primary/30 text-primary font-semibold text-sm hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer"
+                        >
+                            🛒 Vendor Login
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => handleAutofill("admin")}
+                            className="flex-1 py-2 px-3 rounded-xl border-2 border-secondary/30 text-secondary font-semibold text-sm hover:bg-secondary hover:text-white transition-all duration-300 cursor-pointer"
+                        >
+                            🔑 Admin Login
+                        </button>
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

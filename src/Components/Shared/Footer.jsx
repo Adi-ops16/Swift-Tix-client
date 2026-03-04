@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from './Logo';
-import { FaEnvelope, FaPhoneAlt } from "react-icons/fa";
+import { FaEnvelope, FaFacebook, FaInstagram, FaLinkedin, FaPhoneAlt } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
     return (
@@ -40,12 +41,21 @@ const Footer = () => {
 
                 <div>
                     <h6 className="text-lg font-semibold text-[#2e2e2e] mb-4">
-                        Support
+                        Social Links
                     </h6>
-                    <ul className="space-y-2 text-gray-600">
-                        <li className="hover:text-[#5b3f2d] transition">Help Center</li>
-                        <li className="hover:text-[#5b3f2d] transition">FAQs</li>
-                        <li className="hover:text-[#5b3f2d] transition">Contact Support</li>
+                    <ul className="space-y-2 flex gap-4 text-gray-600">
+                        <li className="hover:text-[#5b3f2d] transition">
+                            <a href="https://www.facebook.com/spiegel.spike.854114"><FaFacebook size={25}/></a>
+                        </li>
+                        <li className="hover:text-[#5b3f2d] transition">
+                            <a href="https://www.instagram.com/_astro.philee_/"><FaInstagram size={25} /></a>
+                        </li>
+                        <li className="hover:text-[#5b3f2d] transition">
+                            <a href="https://x.com/AbdulHasib95581"><FaXTwitter size={25}/></a>
+                        </li>
+                        <li className="hover:text-[#5b3f2d] transition">
+                            <a href="#"><FaLinkedin size={25}/></a>
+                        </li>
                     </ul>
                 </div>
 
